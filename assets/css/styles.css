@@ -1,9 +1,10 @@
 /* ==========================================================================
    Crown Barber — Westfield Helensvale
-   Opening animation: a white-ground emblem in the spirit of a premium
-   crest mark — ink-black crown (redrawn from the storefront icon) centred
-   above a single-line grand serif wordmark, gold used only as a small
-   accent. Site (below): dark lounge theme, unchanged.
+   Opening animation: the storefront's own signage, rebuilt — a solid
+   white crown (no outline, silhouette-filled) backlit on dark tile,
+   centred above a single-line grand serif wordmark like a Rolex-style
+   crest. Shares the same dark ground and gold accent as the site below,
+   so the reveal resolves straight into the page.
    ========================================================================== */
 
 :root{
@@ -19,14 +20,14 @@
   --ink-soft:    rgba(240,230,210,.66);
   --ink-faint:   rgba(240,230,210,.38);
 
-  /* Intro-only palette: crisp white ground, ink-black crown & wordmark,
-     gold used only as a small accent — mirrors a premium emblem on white */
-  --intro-bg:         #ffffff;
-  --intro-bg-edge:    #f7f5f0;
-  --intro-ink:        #0e0d0c;
-  --intro-ink-soft:   rgba(14,13,12,.62);
-  --intro-ink-faint:  rgba(14,13,12,.38);
-  --intro-gold:       #a9822f;
+  /* Intro-only palette: dark tiled signage ground, solid white crown and
+     wordmark, gold reserved for the tagline + price-board style pill */
+  --intro-bg:         #0a0810;
+  --intro-bg-edge:    #17121c;
+  --intro-white:      #ffffff;
+  --intro-white-soft: rgba(255,255,255,.68);
+  --intro-white-faint:rgba(255,255,255,.4);
+  --intro-gold:       #d8b567;
 
   --font-display: 'Cinzel', 'Times New Roman', serif;
   --font-accent:  'Cormorant Garamond', Georgia, serif;
@@ -77,6 +78,18 @@ button{ font-family: inherit; }
 #intro.is-leaving{ opacity: 0; }
 #intro.is-hidden{ opacity: 0; pointer-events: none; }
 
+/* Soft backlight behind the crown, like light spilling from a tile sign */
+.glow-field{
+  position: absolute;
+  top: 30%; left: 50%;
+  width: 640px; height: 640px;
+  transform: translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(255,255,255,.14) 0%, rgba(255,255,255,.04) 45%, transparent 72%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: fadeIn 1.8s ease .1s both, glowPulse 5s ease-in-out 1.9s infinite;
+}
+
 /* Skip control */
 .skip-intro{
   position: absolute;
@@ -88,11 +101,11 @@ button{ font-family: inherit; }
   letter-spacing: .12em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--intro-ink-soft);
-  border: 1px solid rgba(14,13,12,.22);
+  color: var(--intro-white-soft);
+  border: 1px solid rgba(255,255,255,.26);
   padding: .6em 1.1em;
   border-radius: 2px;
-  background: rgba(14,13,12,.03);
+  background: rgba(255,255,255,.04);
   backdrop-filter: blur(4px);
   cursor: pointer;
   transition: color .25s ease, border-color .25s ease, background .25s ease;
@@ -100,9 +113,9 @@ button{ font-family: inherit; }
   animation: fadeIn .8s ease 1.2s both;
 }
 .skip-intro:hover, .skip-intro:focus-visible{
-  color: var(--intro-ink);
-  border-color: rgba(14,13,12,.5);
-  background: rgba(14,13,12,.06);
+  color: var(--intro-white);
+  border-color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.09);
   outline: none;
 }
 body.has-entered .skip-intro{ display: none; }
@@ -118,23 +131,21 @@ body.has-entered .skip-intro{ display: none; }
   max-width: 640px;
 }
 
-/* Crown mark — ink-black line mark, redrawn from the shopfront icon,
-   centred above the wordmark exactly like a Rolex-style emblem */
+/* Crown mark — solid white silhouette, no outline, redrawn from the
+   shopfront icon and centred above the wordmark like a Rolex-style crest.
+   Revealed with a rising light-wipe rather than a stroked line-draw,
+   since a filled shape has no path length to animate. */
 .crown-mark{
   overflow: visible;
-  margin: 0 auto 16px;
+  margin: 0 auto 18px;
   display: block;
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  animation: revealCrown 1.15s cubic-bezier(.5,0,.2,1) .35s forwards;
 }
-.crown-outline{
-  fill: none;
-  stroke: var(--intro-ink);
-  stroke-width: 4.5;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  stroke-dasharray: 560;
-  stroke-dashoffset: 560;
-  filter: drop-shadow(0 1px 1px rgba(14,13,12,.12));
-  animation: drawCrown 1.4s cubic-bezier(.5,0,.2,1) .3s forwards;
+.crown-shape{
+  fill: var(--intro-white);
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.45)) drop-shadow(0 0 26px rgba(255,255,255,.2));
 }
 
 /* Wordmark — grand serif emblem, single centred line like ROLEX / the storefront sign */
@@ -156,7 +167,7 @@ body.has-entered .skip-intro{ display: none; }
   display: inline-block;
   opacity: 0;
   transform: translateY(18px);
-  color: var(--intro-ink);
+  color: var(--intro-white);
   animation: letterIn .5s cubic-bezier(.2,.7,.2,1) forwards;
 }
 .line{ font-size: clamp(2rem, 7.2vw, 3.6rem); letter-spacing: .1em; }
@@ -173,13 +184,14 @@ body.has-entered .skip-intro{ display: none; }
 .word:nth-child(2) span:nth-child(5){ animation-delay: 2.46s; }
 .word:nth-child(2) span:nth-child(6){ animation-delay: 2.52s; }
 
-/* Underline — the wordmark's baseline rule */
+/* Underline — the wordmark's backlit baseline */
 .wordmark-rule{
   position: relative;
   width: 0;
   height: 2px;
   margin: 16px auto 22px;
-  background: var(--intro-ink);
+  background: var(--intro-white);
+  box-shadow: 0 0 8px 1px rgba(255,255,255,.5);
   animation: growRule .5s ease 2.75s forwards;
 }
 
@@ -189,7 +201,7 @@ body.has-entered .skip-intro{ display: none; }
   font-style: italic;
   font-weight: 500;
   font-size: clamp(1.05rem, 3vw, 1.4rem);
-  color: var(--intro-ink);
+  color: var(--intro-white);
   margin: 0;
   opacity: 0;
   transform: translateY(10px);
@@ -201,7 +213,7 @@ body.has-entered .skip-intro{ display: none; }
   font-weight: 500;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--intro-ink-soft);
+  color: var(--intro-white-soft);
   margin: 10px 0 0;
   opacity: 0;
   transform: translateY(10px);
@@ -215,7 +227,7 @@ body.has-entered .skip-intro{ display: none; }
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--intro-gold);
-  border: 1px solid rgba(14,13,12,.25);
+  border: 1px solid rgba(255,255,255,.28);
   border-radius: 999px;
   padding: .55em 1.4em;
   opacity: 0;
@@ -226,9 +238,9 @@ body.has-entered .skip-intro{ display: none; }
 .enter-btn{
   margin-top: 30px;
   position: relative;
-  background: var(--intro-ink);
-  border: 1px solid var(--intro-ink);
-  color: #ffffff;
+  background: var(--intro-white);
+  border: 1px solid var(--intro-white);
+  color: #0a0a0a;
   font-family: var(--font-ui);
   font-size: .78rem;
   font-weight: 700;
@@ -254,7 +266,7 @@ body.has-entered .skip-intro{ display: none; }
   font-size: .65rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--intro-ink-faint);
+  color: var(--intro-white-faint);
   opacity: 0;
   animation: fadeIn .8s ease 4.4s forwards;
 }
@@ -267,11 +279,20 @@ body.has-entered .skip-intro{ display: none; }
 @keyframes letterIn{ to{ opacity: 1; transform: translateY(0); } }
 @keyframes growRule{ to{ width: 88px; } }
 
-@keyframes drawCrown{ to{ stroke-dashoffset: 0; } }
+@keyframes revealCrown{
+  0%{ clip-path: inset(100% 0 0 0); opacity: 0; }
+  35%{ opacity: 1; }
+  100%{ clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+@keyframes glowPulse{
+  0%,100%{ opacity: .7; }
+  50%{ opacity: 1; }
+}
 
 @keyframes pulseGlow{
-  0%,100%{ box-shadow: 0 0 0 0 rgba(14,13,12,.22); }
-  50%{ box-shadow: 0 0 0 10px rgba(14,13,12,0); }
+  0%,100%{ box-shadow: 0 0 0 0 rgba(255,255,255,.3); }
+  50%{ box-shadow: 0 0 0 10px rgba(255,255,255,0); }
 }
 
 /* -------------------------------------------------------------------------
@@ -279,7 +300,8 @@ body.has-entered .skip-intro{ display: none; }
    ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce){
   #intro{ transition: none; }
-  .crown-outline{ animation: none; stroke-dashoffset: 0; }
+  .glow-field{ animation: none; opacity: .8; }
+  .crown-mark{ animation: none; clip-path: none; opacity: 1; }
   .wordmark .line span{ animation: none; opacity: 1; transform: none; }
   .wordmark-rule{ animation: none; width: 88px; }
   .tagline, .sub-tagline, .location-pill, .enter-btn, .scroll-cue, .skip-intro{
@@ -320,7 +342,7 @@ body.has-entered .skip-intro{ display: none; }
   font-size: 1.05rem;
   color: var(--parchment);
 }
-.brand-crown{ fill: rgba(200,162,78,.18); stroke: var(--gold); stroke-width: 4; }
+.brand-crown{ fill: var(--gold); }
 .site-nav nav{ display: flex; gap: 28px; }
 .site-nav nav a{
   font-size: .78rem;
