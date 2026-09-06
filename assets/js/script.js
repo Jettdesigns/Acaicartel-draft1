@@ -66,5 +66,5 @@
 
   // Auto-advance once the sequence has fully played, so the animation
   // always resolves into the site even without user interaction.
-  autoTimer = setTimeout(enterSite, reduced ? 0 : 8600);
+  autoTimer = setTimeout(enterSite, reduced ? 0 : 7000);
 })();
