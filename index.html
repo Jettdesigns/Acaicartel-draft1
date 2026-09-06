@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crown Barber — Westfield Helensvale</title>
+<meta name="description" content="Crown Barber, Westfield Helensvale. Master barbers, modern fades, timeless classics. Every chair holds a throne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a href="#site" class="skip-intro" id="skipIntro">Skip Intro ▸</a>
+
+<!-- ================= OPENING ANIMATION ================= -->
+<section id="intro" aria-label="Crown Barber opening animation">
+  <div class="aura" aria-hidden="true"></div>
+  <div class="dust" id="dust" aria-hidden="true"></div>
+
+  <div class="intro-content">
+
+    <svg class="crown-mark" viewBox="0 0 240 200" width="150" height="125" aria-hidden="true">
+      <path id="crownPath" class="crown-outline"
+        d="M34,178 L34,140 L34,80 L70,118 L120,40 L170,118 L206,80 L206,140 L206,178 Z" />
+      <g class="crown-jewels">
+        <circle class="jewel" cx="34" cy="80" r="7"></circle>
+        <circle class="jewel jewel--center" cx="120" cy="40" r="9"></circle>
+        <circle class="jewel" cx="206" cy="80" r="7"></circle>
+        <rect class="gem" x="112" y="152" width="16" height="16" rx="2" transform="rotate(45 120 160)"></rect>
+      </g>
+    </svg>
+
+    <h1 class="wordmark">
+      <span class="line line--crown" aria-hidden="true"><span>C</span><span>R</span><span>O</span><span>W</span><span>N</span></span>
+      <span class="line line--barber" aria-hidden="true"><span>B</span><span>A</span><span>R</span><span>B</span><span>E</span><span>R</span></span>
+      <span class="sr-only">Crown Barber</span>
+    </h1>
+
+    <div class="divider" aria-hidden="true"><span class="divider-gem"></span></div>
+
+    <p class="tagline">Where Every Chair Holds a Throne</p>
+    <p class="sub-tagline">Master Barbers &middot; Modern Fades &middot; Timeless Classics</p>
+
+    <p class="location-pill">Westfield Helensvale &middot; Gold Coast</p>
+
+    <button class="enter-btn" id="enterBtn" type="button">
+      <span>Enter the Court</span>
+    </button>
+
+    <p class="scroll-cue" aria-hidden="true">Tap anywhere to enter now</p>
+  </div>
+</section>
+
+<!-- ================= MAIN SITE ================= -->
+<div id="site">
+
+  <header class="site-nav">
+    <div class="brand">
+      <svg viewBox="0 0 240 200" width="28" height="24" aria-hidden="true" class="brand-crown">
+        <path d="M34,178 L34,140 L34,80 L70,118 L120,40 L170,118 L206,80 L206,140 L206,178 Z"></path>
+      </svg>
+      <span>Crown Barber</span>
+    </div>
+    <nav aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#crew">Careers</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="book-btn" href="#book">Book Now</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">Westfield Helensvale, Gold Coast</p>
+      <h2 class="hero-headline">Cuts fit for a crown.<br>Service fit for a king.</h2>
+      <p class="hero-copy">Skin fades, modern mullets and timeless classics — cut by master barbers who treat every chair like a throne room. Walk in a customer, walk out royalty.</p>
+      <div class="hero-actions">
+        <a class="book-btn book-btn--lg" href="#book">Book Your Throne</a>
+        <a class="ghost-btn" href="#crew">We're Hiring Master Barbers →</a>
+      </div>
+    </section>
+
+    <section class="ribbon" id="crew">
+      <p><strong>Now Recruiting.</strong> Chairs are open for master barbers who want a crown of their own — commission-friendly, walk-in traffic, Westfield Helensvale.</p>
+    </section>
+
+    <section class="services" id="services">
+      <h3 class="section-title">The Royal Treatment</h3>
+      <div class="service-grid">
+        <article class="service-card">
+          <h4>Signature Fade</h4>
+          <p>Precision skin fades, tapers and modern mullets, finished to the millimetre.</p>
+        </article>
+        <article class="service-card">
+          <h4>Classic Cut &amp; Shave</h4>
+          <p>Hot towel, straight razor, timeless gentleman's grooming.</p>
+        </article>
+        <article class="service-card">
+          <h4>Beard Sculpting</h4>
+          <p>Line-ups, shape-ups and beard grooming built for your face.</p>
+        </article>
+        <article class="service-card">
+          <h4>Kids' Cuts</h4>
+          <p>Sharp, patient, and painless — the next generation of the crew.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <h3 class="section-title">Hold Court With Us</h3>
+      <p>Westfield Helensvale Shopping Centre, 1 Millaroo Drive, Helensvale QLD 4212</p>
+      <p class="visit-note">Walk-ins welcome. Bookings held for royalty.</p>
+      <a class="book-btn" id="book" href="#">Book Your Chair</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Crown Barber — Westfield Helensvale</span>
+  </footer>
+</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
