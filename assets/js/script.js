@@ -4,30 +4,10 @@
   var intro = document.getElementById("intro");
   var enterBtn = document.getElementById("enterBtn");
   var skipLink = document.getElementById("skipIntro");
-  var dustField = document.getElementById("dust");
   var yearEl = document.getElementById("year");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // Ambient gold dust particles
-  if (dustField && !reduced) {
-    var count = 26;
-    for (var i = 0; i < count; i++) {
-      var p = document.createElement("span");
-      var size = (Math.random() * 3 + 1.5).toFixed(1);
-      var left = (Math.random() * 100).toFixed(2);
-      var dur = (Math.random() * 5 + 6).toFixed(2);
-      var delay = (Math.random() * 6).toFixed(2);
-      var dx = (Math.random() * 80 - 40).toFixed(0) + "px";
-      p.style.setProperty("--s", size + "px");
-      p.style.setProperty("--dur", dur + "s");
-      p.style.setProperty("--delay", delay + "s");
-      p.style.setProperty("--dx", dx);
-      p.style.left = left + "%";
-      dustField.appendChild(p);
-    }
-  }
 
   var entered = false;
   var autoTimer = null;
